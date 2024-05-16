@@ -17,9 +17,9 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddControllersWithViews(); // Habilita o suporte a MVC
+        services.AddControllersWithViews();
         services.AddDbContext<AppDbContext>(options =>
-            options.UseInMemoryDatabase("ContactsDb")); // Banco de dados em memória
+            options.UseInMemoryDatabase("ContactsDb"));
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
