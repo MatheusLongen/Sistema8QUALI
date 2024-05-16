@@ -1,0 +1,17 @@
+﻿@model Sistema8QUALY.Models.Contacts
+
+<h2>Deletar Contato</h2>
+<h3>Tem certeza que deseja deletar este contato?</h3>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="ContactId" />
+    <div>
+        <p>Nome: @Model.Name</p>
+        <p>Empresa: @Model.Company</p>
+        <p>Emails: @string.Join(", ", Model.Emails)</p>
+        <p>Telefone Pessoal: @Model.PersonalPhone</p>
+        <p>Telefone Comercial: @Model.BusinessPhone</p>
+    </div>
+    <button type="submit" class="btn btn-danger">Deletar</button>
+    <a asp-action="Index" class="btn btn-default">Cancelar</a>
+</form>

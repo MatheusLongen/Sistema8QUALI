@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Sistema8QUALY.Models.Contacts>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2>Lista de Contatos</h2>
+
+<form method="get" asp-controller="Contacts" asp-action="Index">
+    <div class="form-group">
+        <input type="text" id="searchString" name="searchString" class="form-control" placeholder="Pesquisar..." value="@ViewData["CurrentFilter"]" title="Use espaços para separar múltiplos termos de busca." />
+        <button type="submit" class="btn btn-primary mt-2">Filtrar</button>
+        <button type="button" id="clearFilter" class="btn btn-secondary mt-2">Limpar Filtro</button>
+    </div>
+</form>
+
+<table class="table">
+    <tr>
+        <th>Nome</th>
+        <th>Empresa</th>
+        <th>Emails</th>
+        <th>Telefone Pessoal</th>
+        <th>Telefone Comercial</th>
+        <th></th>
+    </tr>
+    @foreach (var contact in Model)
+    {
+        <tr>
+            <td>@contact.Name</td>
+            <td>@contact.Company</td>
+            <td>@string.Join(", ", contact.Emails)</td>
+            <td>@contact.PersonalPhone</td>
+            <td>@contact.BusinessPhone</td>
+            <td>
+                <a href="@Url.Action("Edit", new { id = contact.ContactId })">Editar</a> |
+                <a href="@Url.Action("Delete", new { id = contact.ContactId })">Deletar</a>
+            </td>
+        </tr>
+    }
+</table>
+
+@section Scripts {
+    <script>
+        document.getElementById('clearFilter').addEventListener('click', function () {
+            document.getElementById('searchString').value = '';
+            document.forms[0].submit();
+        });
+    </script>
+}
